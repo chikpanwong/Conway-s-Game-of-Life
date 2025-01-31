@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 
 public class CWWindowManager {
-    // Rename
+
     GLFWErrorCallback errorCallback;
     GLFWKeyCallback keyCallback;
     GLFWFramebufferSizeCallback fbCallback;
@@ -96,7 +96,7 @@ public class CWWindowManager {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         glViewport(0, 0, WIN_WIDTH, WIN_HEIGHT);
-        glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+        glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
         this.shader_program = glCreateProgram();
         int vs = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vs,
@@ -110,7 +110,7 @@ public class CWWindowManager {
         glShaderSource(fs,
                 "uniform vec3 color;" +
                         "void main(void) {" +
-                        " gl_FragColor = vec4(0.7f, 0.5f, 0.1f, 1.0f);" +
+                        " gl_FragColor = vec4(0.0f, 0.0f, 1.0f, 1.0f);" +
                         "}");
         glCompileShader(fs);
         glAttachShader(shader_program, fs);
