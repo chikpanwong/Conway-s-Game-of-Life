@@ -4,7 +4,12 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+assets/images/
+
 ### IntelliJ IDEA ###
+.idea/uiDesigner.xml
+.idea/misc.xml
+.idea/workspace.xml
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
@@ -13,8 +18,11 @@ build/
 *.iml
 *.ipr
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+
+cafiles/*
+*.docx
+*.pdf
+*.xps
 
 ### Eclipse ###
 .apt_generated
