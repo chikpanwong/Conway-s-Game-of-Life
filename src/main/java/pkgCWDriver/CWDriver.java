@@ -1,6 +1,6 @@
 
 
-package cwWindowManager;
+package pkgCWDriver;
 
 
 import org.joml.Matrix4f;
@@ -16,7 +16,7 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 
-public class CWWindowManager {
+public class CWDriver {
 
     GLFWErrorCallback errorCallback;
     GLFWKeyCallback keyCallback;
@@ -31,7 +31,7 @@ public class CWWindowManager {
     FloatBuffer myFloatBuffer = BufferUtils.createFloatBuffer(OGL_MATRIX_SIZE);
     int vpMatLocation = 0, renderColorLocation = 0;
     public static void main(String[] args) {
-        new CWWindowManager().render();
+        new CWDriver().render();
     } // public static void main(String[] args)
     void render() {
         try {
