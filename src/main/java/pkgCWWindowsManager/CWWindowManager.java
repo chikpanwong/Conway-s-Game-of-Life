@@ -24,6 +24,13 @@ public class CWWindowManager {
     private static int win_height;
     private static int win_width;
 
+    private CWWindowManager() {
+        my_window = this;
+        // Default size from asm 1
+//        setWinWidth(1800,1200);
+        initGlfwWindow();
+    }
+
     private CWWindowManager(int width, int height) {
         this.win_width = width;
         this.win_height = height;
@@ -46,7 +53,7 @@ public class CWWindowManager {
     public static CWWindowManager get(){
         if (my_window == null) {
             // Default size from asm 1
-            my_window = new CWWindowManager(1800, 1200);
+            my_window = new CWWindowManager();
         }
         return my_window;
     }
