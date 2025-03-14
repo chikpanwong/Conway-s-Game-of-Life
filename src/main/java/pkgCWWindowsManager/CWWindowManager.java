@@ -72,7 +72,7 @@ public class CWWindowManager {
     }  //  public void setWindowPosition(...)
 
     public static CWWindowManager get(int width, int height, int orgX, int orgY) {
-        get(width, height);
+        my_window = get(width, height);
         setWindowPosition(orgX, orgY);
         return my_window;
     }  //  public SlWindowManager get(...)
