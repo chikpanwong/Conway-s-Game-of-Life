@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class CWGoLArray extends CWPingPongArray {
     private static final int DEAD = 0;
-    private static final int LIVE = 1;
+    private static final int ALIVE = 1;
 
     public CWGoLArray(final String myDataFile) {
         super(1,1);
@@ -26,8 +26,8 @@ public class CWGoLArray extends CWPingPongArray {
         // init both live and next arrays to DEAD
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
-                setNextArray(i,j,DEAD);
-                setLiveArray(i,j,DEAD);
+                nextArray[i][j] = DEAD;
+                liveArray[i][j] = DEAD;
             }
         }
 
@@ -38,8 +38,8 @@ public class CWGoLArray extends CWPingPongArray {
             // put value 1(LIVE) in random cell until numLiveCells
             int row = rand.nextInt(numRows);
             int col = rand.nextInt(numCols);
-            if (getLiveArray(row,col) == DEAD) {
-                setNextArray(row,col,LIVE);
+            if (liveArray[row][col] == DEAD) {
+                setCell(row,col,ALIVE);
                 placed++;
                 super.swapLiveAndNext();
             }

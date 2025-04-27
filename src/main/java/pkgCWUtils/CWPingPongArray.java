@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class CWPingPongArray {
 
-    private int[][] liveArray;
-    private int[][] nextArray;
+    protected int[][] liveArray;
+    protected int[][] nextArray;
     private Random random;
     private final int ROWS;
     private final int COLS;
@@ -225,22 +225,6 @@ public class CWPingPongArray {
             throw new RuntimeException(e);
         }
 
-    }
-
-    public int getLiveArray(int row, int col) {
-        return liveArray[row][col];
-    }
-
-    public void setLiveArray(int row, int col, int newValue) {
-        liveArray[row][col] = newValue;
-    }
-
-    public int getNextArray(int row, int col) {
-        return nextArray[row][col];
-    }
-
-    public void setNextArray(int row, int col, int newValue) {
-        nextArray[row][col] = newValue;
     }
 
     public int countLiveDegreeTwoNeighbors(int row, int col){
