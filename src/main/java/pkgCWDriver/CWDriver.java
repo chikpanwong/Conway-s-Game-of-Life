@@ -1,6 +1,8 @@
 package pkgCWDriver;
 
+import pkgCWGoLArray.CWGoLArray;
 import pkgCWRenderer.CWRenderer;
+import pkgCWUtils.CWPingPongArray;
 import pkgCWWindowsManager.CWWindowManager;
 
 
@@ -14,6 +16,47 @@ public class CWDriver {
         final CWWindowManager myWM = CWWindowManager.get(winWidth, winHeight, winOrgX, winOrgY);
         final CWRenderer myRenderer = new CWRenderer(myWM);
         myRenderer.render(polyOffset, polyPadding, polyLength, numRows, numCols);
+
+
+        final int ROWS = 7, COLS = 7;
+        int myMin = 10, myMax = 20;
+        CWPingPongArray myBoard = new CWPingPongArray(ROWS, COLS, myMin, myMax);
+        myBoard.swapLiveAndNext();
+        System.out.println("[10, 20) Board:");
+        myBoard.printArray();
+
+        for (int row = 0; row < ROWS; ++row) {
+            for (int col = 0; col < COLS; ++col) {
+                myBoard.setCell(row, col, col);
+            }  //  for(int col = 0; col < COLS; ++col)
+        }  //  for(int row = 0; row < ROWS; ++row)
+        myBoard.swapLiveAndNext();
+        System.out.println("\n[0, COLS) Board:");
+        myBoard.printArray();
+
+        myBoard.randomizeViaFisherYatesKnuth();
+        myBoard.swapLiveAndNext();
+        System.out.println("\n[0, COLS) Board Randomized via FYK algorithm:");
+        myBoard.printArray();
+
+        myBoard.loadFile("neighbors_test.txt");
+        System.out.println("\n[0, 1] data file array:");
+        myBoard.swapLiveAndNext();
+        myBoard.printArray();
+
+        myBoard.updateToNearestNNSum();
+        myBoard.swapLiveAndNext();
+        System.out.println("\nNearest Neighbor sum array:");
+        myBoard.printArray();
+        myBoard.save("test_sum.txt");
+
+        CWPingPongArray myBoardLive = new CWGoLArray(ROWS, COLS, 10);
+        myBoardLive.swapLiveAndNext();
+        System.out.println("\nmyBoardLive array:");
+        myBoardLive.printArray();
+        int countLive = myBoardLive.countLiveDegreeTwoNeighbors(0,0);
+        System.out.println("\nThere are " + countLive + " lives in cell 2,2:");
+
     } // public static void main(String[] args)
 
 }  //  public class Driver
