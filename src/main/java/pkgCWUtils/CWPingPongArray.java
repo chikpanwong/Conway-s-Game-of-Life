@@ -1,17 +1,15 @@
 package pkgCWUtils;
 import java.io.*;
-import java.security.DrbgParameters;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner;
 
 public class CWPingPongArray {
 
     protected int[][] liveArray;
     protected int[][] nextArray;
     private Random random;
-    private final int ROWS;
-    private final int COLS;
+    protected final int ROWS;
+    protected final int COLS;
     private int MIN;
     private int MAX;
 
@@ -227,11 +225,11 @@ public class CWPingPongArray {
 
     }
 
-    public int countLiveDegreeTwoNeighbors(int row, int col){
+    public int countLiveDegreeOneNeighbors(int row, int col){
         copyToNextArray();
 
         int count = 0;
-        int degree = 2;
+        int degree = 1;
         for(int i = -degree; i <= degree; i++){
             for(int j = -degree; j <= degree; j++){
                 if (i == 0 && j == 0 ) continue; // skip the center

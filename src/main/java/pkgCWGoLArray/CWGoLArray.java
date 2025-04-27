@@ -13,7 +13,7 @@ public class CWGoLArray extends CWPingPongArray {
         loadFile(myDataFile);
     }
 
-    public CWGoLArray(int numRows, int numCols){
+    public CWGoLArray(final int numRows, final int numCols){
         super(numRows,numCols);
     }
 
@@ -45,4 +45,39 @@ public class CWGoLArray extends CWPingPongArray {
             }
         }
     }
+
+    public void onTickUpdate() {
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                int liveCellCount = countLiveDegreeOneNeighbors(i, j);
+                nextArray[i][j] = applyRules(liveArray[i][j], liveCellCount);
+            }
+        }
+        swapLiveAndNext();
+    }
+
+    private int applyRules(int currentState, int liveCellCount) {
+//        1. Live Neighbors < 2 --> Kill
+//        2. Live Neighbors == 2 || Live Neighbors == 3 --> Retain
+//        3. Live Neighbors > 3 --> Kill
+//        4. Dead with Live Neighbors == 3 --> Alive again
+        if (currentState == ALIVE) {
+            // Rule 1,3
+            if (liveCellCount < 2 || liveCellCount > 3) {
+                return DEAD;
+            }
+            // Rule 2: Survival
+            else {
+                return ALIVE;
+            }
+        } else {
+            // Rule 4
+            if (liveCellCount == 3) {
+                return ALIVE;
+            } else {
+                return DEAD;
+            }
+        }
+    }
+
 }

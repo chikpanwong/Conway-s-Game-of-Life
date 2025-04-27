@@ -1,21 +1,19 @@
 package pkgCWDriver;
 
 import pkgCWGoLArray.CWGoLArray;
-import pkgCWRenderer.CWRenderer;
 import pkgCWUtils.CWPingPongArray;
-import pkgCWWindowsManager.CWWindowManager;
 
 
 public class CWDriver {
 
     public static void main(String[] args) {
-        final int numRows = 6, numCols = 7, polyLength = 50, polyOffset = 10, polyPadding = 20;
-        final int winWidth = (polyLength + polyPadding) * numCols + 2 * polyOffset;
-        final int winHeight = (polyLength + polyPadding) * numRows + 2 * polyOffset;
-        final int winOrgX = 50, winOrgY = 80;
-        final CWWindowManager myWM = CWWindowManager.get(winWidth, winHeight, winOrgX, winOrgY);
-        final CWRenderer myRenderer = new CWRenderer(myWM);
-        myRenderer.render(polyOffset, polyPadding, polyLength, numRows, numCols);
+//        final int numRows = 6, numCols = 7, polyLength = 50, polyOffset = 10, polyPadding = 20;
+//        final int winWidth = (polyLength + polyPadding) * numCols + 2 * polyOffset;
+//        final int winHeight = (polyLength + polyPadding) * numRows + 2 * polyOffset;
+//        final int winOrgX = 50, winOrgY = 80;
+//        final CWWindowManager myWM = CWWindowManager.get(winWidth, winHeight, winOrgX, winOrgY);
+//        final CWRenderer myRenderer = new CWRenderer(myWM);
+//        myRenderer.render(polyOffset, polyPadding, polyLength, numRows, numCols);
 
 
         final int ROWS = 7, COLS = 7;
@@ -54,8 +52,13 @@ public class CWDriver {
         myBoardLive.swapLiveAndNext();
         System.out.println("\nmyBoardLive array:");
         myBoardLive.printArray();
-        int countLive = myBoardLive.countLiveDegreeTwoNeighbors(0,0);
+        int countLive = myBoardLive.countLiveDegreeOneNeighbors(2,2);
         System.out.println("\nThere are " + countLive + " lives in cell 2,2:");
+
+        CWPingPongArray CWGoLArray = new CWGoLArray("neighbors_test.txt");
+        System.out.println("\n[0, 1] data CWGoLArray file array:");
+        myBoard.swapLiveAndNext();
+        myBoard.printArray();
 
     } // public static void main(String[] args)
 
