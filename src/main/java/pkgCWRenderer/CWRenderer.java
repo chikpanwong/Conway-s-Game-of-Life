@@ -10,6 +10,7 @@ import pkgCWWindowsManager.CWWindowManager;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+import static java.lang.Thread.sleep;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwWaitEvents;
 import static org.lwjgl.opengl.GL11.*;
@@ -32,6 +33,8 @@ public class CWRenderer {
     private final int FPV = 2;
     private final int VPT = 4;
     private final int EPT = 6;
+
+    private final int SLEEP_INT = 300;
 
     private int vpMatLocation = 0;
     private int renderColorLocation = 0;
@@ -107,6 +110,8 @@ public class CWRenderer {
             int vbo = glGenBuffers();
             int ibo = glGenBuffers();
 
+            GOL.onTickUpdate();
+
             float[] vertices = GM.generateTilesVertices(NUM_ROWS,NUM_COLS);
             GM.generateTilesVertices(GOL,vertices);
 
@@ -122,15 +127,27 @@ public class CWRenderer {
 
             int[] indices = GM.generateTileIndices(aliveCount);
 
+//            glBindBuffer(GL_ARRAY_BUFFER, vbo);
+//            glBufferData(GL_ARRAY_BUFFER, (FloatBuffer) BufferUtils.
+//                    createFloatBuffer(vertices.length).
+//                    put(vertices).flip(), GL_STATIC_DRAW);
+//
+//            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+//            glBufferData(GL_ELEMENT_ARRAY_BUFFER, (IntBuffer) BufferUtils.
+//                    createIntBuffer(indices.length).
+//                    put(indices).flip(), GL_STATIC_DRAW);
+
             glBindBuffer(GL_ARRAY_BUFFER, vbo);
-            glBufferData(GL_ARRAY_BUFFER, (FloatBuffer) BufferUtils.
-                    createFloatBuffer(vertices.length).
-                    put(vertices).flip(), GL_STATIC_DRAW);
-            glEnableClientState(GL_VERTEX_ARRAY);
+            FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(vertices.length);
+            vertexBuffer.put(vertices).flip();
+            glBufferData(GL_ARRAY_BUFFER, vertexBuffer, GL_DYNAMIC_DRAW);
+
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, (IntBuffer) BufferUtils.
-                    createIntBuffer(indices.length).
-                    put(indices).flip(), GL_STATIC_DRAW);
+            IntBuffer indexBuffer = BufferUtils.createIntBuffer(indices.length);
+            indexBuffer.put(indices).flip();
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBuffer, GL_DYNAMIC_DRAW);
+
+            glEnableClientState(GL_VERTEX_ARRAY);
             glVertexPointer(2, GL_FLOAT, 0, 0L);
             // set here for the suqare in bottom left
             viewProjMatrix.setOrtho(0, winWidthHeight[0], 0, winWidthHeight[1], 0, 10);
@@ -138,10 +155,17 @@ public class CWRenderer {
                     viewProjMatrix.get(myFloatBuffer));
             glUniform3f(renderColorLocation, 1.0f, 0.498f, 0.153f);
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
             final int totalIndices = aliveCount * EPT;
             glDrawElements(GL_TRIANGLES, totalIndices, GL_UNSIGNED_INT, 0L);
+
             this.WM.swapBuffers();
 
+            try {
+                Thread.sleep(SLEEP_INT);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
 
 
