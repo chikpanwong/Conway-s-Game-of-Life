@@ -14,6 +14,12 @@ public class CWPingPongArray {
     private int MAX;
     private int DEFAULT_VALUE;
 
+    public CWPingPongArray(final String myDataFile) {
+        loadFile(myDataFile);
+        swapLiveAndNext();
+        copyToNextArray();
+    }
+
     public CWPingPongArray(int numRows, int numCols) {
         this.ROWS = numRows;
         this.COLS = numCols;

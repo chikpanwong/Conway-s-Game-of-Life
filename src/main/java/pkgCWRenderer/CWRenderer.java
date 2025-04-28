@@ -34,7 +34,7 @@ public class CWRenderer {
     private final int VPT = 4;
     private final int EPT = 6;
 
-    private final int SLEEP_INT = 300;
+    private final int SLEEP_INT = 100;
 
     private int vpMatLocation = 0;
     private int renderColorLocation = 0;
@@ -80,7 +80,7 @@ public class CWRenderer {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         glViewport(0, 0, winWidthHeight[0], winWidthHeight[1]);
-        glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         this.shader_program = glCreateProgram();
         int vs = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vs,
@@ -94,7 +94,7 @@ public class CWRenderer {
         glShaderSource(fs,
                 "uniform vec3 color;" +
                         "void main(void) {" +
-                        " gl_FragColor = vec4(0.6f, 0.7f, 0.1f, 1.0f);" +
+                        " gl_FragColor = vec4(0.9f, 0.2f, 0.2f, 1.0f);" +
                         "}");
         glCompileShader(fs);
         glAttachShader(shader_program, fs);

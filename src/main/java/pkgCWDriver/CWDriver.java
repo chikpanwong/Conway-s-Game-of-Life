@@ -13,15 +13,19 @@ public class CWDriver {
 
     public static void main(String[] args) {
 
-
-        final int numRows = 16, numCols = 16, polyLength = 50, polyOffset = 10, polyPadding = 20;
+        int numRows = 16, numCols = 16, polyLength = 15, polyOffset = 5, polyPadding = 8;
         final int winWidth = (polyLength + polyPadding) * numCols + 2 * polyOffset;
         final int winHeight = (polyLength + polyPadding) * numRows + 2 * polyOffset;
         final int winOrgX = 50, winOrgY = 80;
+        final int numLiveCell = (int) (numRows * numCols * 0.2 + 0.5);
 
         CWGoLArray golArray;
-
-        golArray = new CWGoLArray("gol_input_1.txt");
+        if (args.length > 0) {
+            // If a file is provided
+            golArray = new CWGoLArray(args[0]);
+        } else {
+            golArray = new CWGoLArray(numRows, numCols, numLiveCell);
+        }
 
         final CWWindowManager myWM = CWWindowManager.get(winWidth, winHeight, winOrgX, winOrgY);
         final CWRenderer myRenderer = new CWRenderer(myWM,golArray);

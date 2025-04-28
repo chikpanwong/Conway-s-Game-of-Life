@@ -9,17 +9,14 @@ public class CWGoLArray extends CWPingPongArray {
     private static final int ALIVE = 1;
 
     public CWGoLArray(final String myDataFile) {
-        super(16,16);
-        super.loadFile(myDataFile);
-        super.swapLiveAndNext();
-        copyToNextArray();
+        super(myDataFile);
     }
 
     public CWGoLArray(final int numRows, final int numCols){
         super(numRows,numCols);
         initDead(numRows,numCols);
         int numLiveCells;
-        numLiveCells = (int) (numRows * numCols * 0.2f * 0.5);
+        numLiveCells = (int) (numRows * numCols * 0.2f + 0.5);
         initRandomAlive(numRows,numRows,numLiveCells);
     }
 
