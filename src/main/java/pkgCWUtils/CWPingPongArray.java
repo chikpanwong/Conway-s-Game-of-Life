@@ -8,10 +8,11 @@ public class CWPingPongArray {
     protected int[][] liveArray;
     protected int[][] nextArray;
     private Random random;
-    protected final int ROWS;
-    protected final int COLS;
+    protected int ROWS;
+    protected int COLS;
     private int MIN;
     private int MAX;
+    private int DEFAULT_VALUE;
 
     public CWPingPongArray(int numRows, int numCols) {
         this.ROWS = numRows;
@@ -66,7 +67,7 @@ public class CWPingPongArray {
     }
 
     // https://www.geeksforgeeks.org/how-to-clone-a-2d-array-with-different-row-sizes-in-java/
-    private void copyToNextArray() {
+    protected void copyToNextArray() {
         for (int i = 0; i < ROWS; i++) {
             System.arraycopy(liveArray[i], 0, nextArray[i], 0, COLS);
         }
@@ -126,46 +127,43 @@ public class CWPingPongArray {
         randomize();
     }
 
+    private void initArrays() {
+        liveArray = new int[ROWS][COLS];
+        nextArray = new int[ROWS][COLS];
+
+        for (int row = 0; row < ROWS; row++) {
+            Arrays.fill(liveArray[row], DEFAULT_VALUE);
+            Arrays.fill(nextArray[row], DEFAULT_VALUE);
+        }
+    }
+
     // https://www.geeksforgeeks.org/read-file-into-an-array-in-java/
     // https://www.baeldung.com/java-file-to-arraylist
     public void loadFile(String dataFileName) {
         try (BufferedReader myReader = new BufferedReader(new FileReader(dataFileName))) {
-            // Read default value (first line)
-            String line = myReader.readLine();
-            if (line == null) throw new RuntimeException("Empty file");
-            int defaultVal = Integer.parseInt(line.trim());
+            String inputLine;
+            DEFAULT_VALUE = Integer.parseInt(myReader.readLine());
+            MIN = MAX = DEFAULT_VALUE;
+            inputLine = myReader.readLine();
+            int[] rowCol = Arrays.stream(inputLine.split("\\s+"))
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
+            ROWS = rowCol[0]; COLS = rowCol[1];
+            initArrays();
 
-            // Read dimensions (second line)
-            line = myReader.readLine();
-            if (line == null) throw new RuntimeException("Missing dimensions");
-            String[] dims = line.trim().split("\\s+");
-            if (dims.length != 2) throw new RuntimeException("Invalid dimensions format");
-            int fileRows = Integer.parseInt(dims[0]);
-            int fileCols = Integer.parseInt(dims[1]);
-
-            // Initialize array with default values
-            nextArray = new int[fileRows][fileCols];
-            for (int[] row : nextArray) {
-                Arrays.fill(row, defaultVal);
-            }
-
-            // Process remaining lines using your existing code
-            int curRow;
-            while ((line = myReader.readLine()) != null) {
-                line = line.trim();
-                if (line.isEmpty()) continue;
-
-                // Your existing processing code
-                int[] readRow = Arrays.stream(line.split("\\s+"))
+            int curRow = 0, rowLength = 0;
+            while ((inputLine = myReader.readLine()) != null) {
+                // Process each inputLine here
+                int[] readRow = Arrays.stream(inputLine.split("\\s+"))
                         .mapToInt(Integer::parseInt)
                         .toArray();
                 curRow = readRow[0];
 
                 for (int curCol = 1; curCol < readRow.length; ++curCol) {
                     nextArray[curRow][curCol-1] = readRow[curCol];
-                }
-            }
-        } catch (IOException e) {
+                }  //  for(int curCol = 0; curCol < readRow.length; ++curCol)
+            }  //  while ((inputLine = myReader.readLine()) != null)
+        }catch (IOException e) {
             throw new RuntimeException("Error reading file: " + dataFileName, e);
         }
 
@@ -226,7 +224,6 @@ public class CWPingPongArray {
     }
 
     public int countLiveDegreeOneNeighbors(int row, int col){
-        copyToNextArray();
 
         int count = 0;
         int degree = 1;
@@ -246,5 +243,7 @@ public class CWPingPongArray {
 
         return count;
     }
+
+
 
 }
