@@ -100,7 +100,6 @@ public class CWGoLArray extends CWPingPongArray {
 
     }
 
-
     // Render the grid (for testing purposes, just a simple print)
     public void render() {
         for (int r = 0; r < ROWS; r++) {
