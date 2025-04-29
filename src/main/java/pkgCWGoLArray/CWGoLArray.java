@@ -10,6 +10,10 @@ public class CWGoLArray extends CWPingPongArray {
 
     public CWGoLArray(final String myDataFile) {
         super(myDataFile);
+//        super(16,16,DEAD, ALIVE);
+//        loadFile(myDataFile);
+//        swapLiveAndNext();
+//        copyToNextArray();
     }
 
     public CWGoLArray(final int numRows, final int numCols){
@@ -71,7 +75,6 @@ public class CWGoLArray extends CWPingPongArray {
         }
     }
 
-
         private int applyRules(int currentState, int liveCellCount) {
 //        1. Live Neighbors < 2 --> Kill
 //        2. Live Neighbors == 2 || Live Neighbors == 3 --> Retain
@@ -115,6 +118,14 @@ public class CWGoLArray extends CWPingPongArray {
             }
             System.out.println();
         }
+    }
+
+    public int getNumRows() {
+        return this.ROWS;
+    }
+
+    public int getNumCols() {
+        return this.COLS;
     }
 
 }

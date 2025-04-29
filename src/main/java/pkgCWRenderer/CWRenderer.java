@@ -127,16 +127,6 @@ public class CWRenderer {
 
             int[] indices = GM.generateTileIndices(aliveCount);
 
-//            glBindBuffer(GL_ARRAY_BUFFER, vbo);
-//            glBufferData(GL_ARRAY_BUFFER, (FloatBuffer) BufferUtils.
-//                    createFloatBuffer(vertices.length).
-//                    put(vertices).flip(), GL_STATIC_DRAW);
-//
-//            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-//            glBufferData(GL_ELEMENT_ARRAY_BUFFER, (IntBuffer) BufferUtils.
-//                    createIntBuffer(indices.length).
-//                    put(indices).flip(), GL_STATIC_DRAW);
-
             glBindBuffer(GL_ARRAY_BUFFER, vbo);
             FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(vertices.length);
             vertexBuffer.put(vertices).flip();

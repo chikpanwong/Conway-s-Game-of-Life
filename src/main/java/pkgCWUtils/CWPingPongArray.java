@@ -133,15 +133,15 @@ public class CWPingPongArray {
         randomize();
     }
 
-    private void initArrays() {
-        liveArray = new int[ROWS][COLS];
-        nextArray = new int[ROWS][COLS];
-
-        for (int row = 0; row < ROWS; row++) {
-            Arrays.fill(liveArray[row], DEFAULT_VALUE);
-            Arrays.fill(nextArray[row], DEFAULT_VALUE);
-        }
-    }
+//    private void initArrays() {
+//        liveArray = new int[ROWS][COLS];
+//        nextArray = new int[ROWS][COLS];
+//
+//        for (int row = 0; row < ROWS; row++) {
+//            Arrays.fill(liveArray[row], DEFAULT_VALUE);
+//            Arrays.fill(nextArray[row], DEFAULT_VALUE);
+//        }
+//    }
 
     // https://www.geeksforgeeks.org/read-file-into-an-array-in-java/
     // https://www.baeldung.com/java-file-to-arraylist
@@ -155,7 +155,14 @@ public class CWPingPongArray {
                     .mapToInt(Integer::parseInt)
                     .toArray();
             ROWS = rowCol[0]; COLS = rowCol[1];
-            initArrays();
+
+            liveArray = new int[ROWS][COLS];
+            nextArray = new int[ROWS][COLS];
+
+            for (int row = 0; row < ROWS; row++) {
+                Arrays.fill(liveArray[row], DEFAULT_VALUE);
+                Arrays.fill(nextArray[row], DEFAULT_VALUE);
+            }
 
             int curRow = 0, rowLength = 0;
             while ((inputLine = myReader.readLine()) != null) {
