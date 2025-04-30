@@ -9,7 +9,6 @@ import pkgCWWindowsManager.CWWindowManager;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import static java.lang.Thread.sleep;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwWaitEvents;
 import static org.lwjgl.opengl.GL11.*;
@@ -42,7 +41,6 @@ public class CWRenderer {
     private final CWGoLArray GOL;
     private CWGeometryManager GM;
 
-
     public CWRenderer(CWWindowManager windowManager, CWGoLArray golArray) {
         this.WM = windowManager;
         this.GOL = golArray;
@@ -56,11 +54,10 @@ public class CWRenderer {
         this.OFFSET = offset;
         this.SIZE = size;
         winWidthHeight = this.WM.getWindowSize();
-        this.GM = new CWGeometryManager(NUM_ROWS, NUM_COLS, OFFSET, SIZE, PADDING, winWidthHeight);
+        this.GM = new CWGeometryManager(NUM_ROWS, NUM_COLS, OFFSET, SIZE, PADDING, winWidthHeight, GOL);
         this.WM.updateContextToThis();
         renderLoop();
         this.WM.destroyGlfwWindow();
-
     }
 
     private void renderLoop() {
@@ -112,17 +109,6 @@ public class CWRenderer {
             GOL.onTickUpdate();
 
             float[] vertices = GM.generateTilesVertices(NUM_ROWS,NUM_COLS);
-            GM.generateTilesVertices(GOL,vertices);
-
-//            // Count actual alive cells to determine how many indices we need
-//            int aliveCount = 0;
-//            for (int r = 0; r < NUM_ROWS; r++) {
-//                for (int c = 0; c < NUM_COLS; c++) {
-//                    if (GOL.isCellAlive(r, c)) {
-//                        aliveCount++;
-//                    }
-//                }
-//            }
 
             int aliveCount = GOL.totolLiveCell();
 

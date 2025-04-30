@@ -133,16 +133,6 @@ public class CWPingPongArray {
         randomize();
     }
 
-//    private void initArrays() {
-//        liveArray = new int[ROWS][COLS];
-//        nextArray = new int[ROWS][COLS];
-//
-//        for (int row = 0; row < ROWS; row++) {
-//            Arrays.fill(liveArray[row], DEFAULT_VALUE);
-//            Arrays.fill(nextArray[row], DEFAULT_VALUE);
-//        }
-//    }
-
     // https://www.geeksforgeeks.org/read-file-into-an-array-in-java/
     // https://www.baeldung.com/java-file-to-arraylist
     public void loadFile(String dataFileName) {
@@ -229,7 +219,6 @@ public class CWPingPongArray {
                 }
                 writer.println();
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

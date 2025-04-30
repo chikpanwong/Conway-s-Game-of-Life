@@ -4,9 +4,6 @@ import pkgCWGoLArray.CWGoLArray;
 import pkgCWRenderer.CWRenderer;
 import pkgCWWindowsManager.CWWindowManager;
 
-import javax.swing.*;
-
-
 public class CWDriver {
 
     public static void main(String[] args) {
@@ -37,7 +34,6 @@ public class CWDriver {
         final CWRenderer myRenderer = new CWRenderer(myWM,golArray);
 
         myRenderer.render(polyOffset, polyPadding, polyLength, numRows, numCols);
-
 
     } // public static void main(String[] args)
 

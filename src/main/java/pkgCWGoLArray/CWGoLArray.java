@@ -10,10 +10,6 @@ public class CWGoLArray extends CWPingPongArray {
 
     public CWGoLArray(final String myDataFile) {
         super(myDataFile);
-//        super(16,16,DEAD, ALIVE);
-//        loadFile(myDataFile);
-//        swapLiveAndNext();
-//        copyToNextArray();
     }
 
     public CWGoLArray(final int numRows, final int numCols){
