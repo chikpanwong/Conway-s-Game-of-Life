@@ -24,7 +24,11 @@ public class CWDriver {
         } else {
             numRows = 100; numCols = 100;
             final int numLiveCell = (int) (numRows * numCols * 0.2 + 0.5);
+//            System.out.println(numLiveCell);
             golArray = new CWGoLArray(numRows, numCols, numLiveCell);
+//            golArray.printArray();
+            System.out.println(golArray.totolLiveCell());
+
         }
 
         final int polyLength = 15, polyOffset = 5, polyPadding = 8;

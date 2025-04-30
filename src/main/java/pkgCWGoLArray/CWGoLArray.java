@@ -25,11 +25,11 @@ public class CWGoLArray extends CWPingPongArray {
     }
 
     public CWGoLArray(int numRows, int numCols, int numLiveCells) {
-        super(numRows, numCols);
+        super(numRows,numCols);
         if (numLiveCells > numCols * numCols){
             throw new ArithmeticException("too many live cells, cannot contain all live cells");
         }
-        initDead(numRows,numCols);
+//        initDead(numRows,numCols);
         initRandomAlive(numRows,numRows,numLiveCells);
     }
 
@@ -70,7 +70,8 @@ public class CWGoLArray extends CWPingPongArray {
             if (liveArray[row][col] == DEAD) {
                 setCell(row,col,ALIVE);
                 placed++;
-                super.swapLiveAndNext();
+                swapLiveAndNext();
+                copyToNextArray();
             }
         }
     }
@@ -100,6 +101,19 @@ public class CWGoLArray extends CWPingPongArray {
 
     }
 
+    // Count actual alive cells to determine how many indices we need
+    public int totolLiveCell(){
+        int aliveCount = 0;
+        for (int r = 0; r < ROWS; r++) {
+            for (int c = 0; c < COLS; c++) {
+                if (this.isCellAlive(r, c)) {
+                    aliveCount++;
+                }
+            }
+        }
+        return aliveCount;
+    }
+
     // Render the grid (for testing purposes, just a simple print)
     public void render() {
         for (int r = 0; r < ROWS; r++) {
@@ -121,11 +135,15 @@ public class CWGoLArray extends CWPingPongArray {
     }
 
     public int getNumRows() {
-        return this.ROWS;
+        int[][] liveArrayClone = this.getArray();
+
+        return liveArrayClone.length;
     }
 
     public int getNumCols() {
-        return this.COLS;
+        int[][] liveArrayClone = this.getArray();
+
+        return liveArrayClone[0].length;
     }
 
 }
