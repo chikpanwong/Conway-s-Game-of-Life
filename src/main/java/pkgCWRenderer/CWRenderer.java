@@ -3,7 +3,6 @@ package pkgCWRenderer;
 import org.joml.Matrix4f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL;
-import pkgCWGeometryManager.CWGeometryManager;
 import pkgCWGoLArray.CWGoLArray;
 import pkgCWWindowsManager.CWWindowManager;
 

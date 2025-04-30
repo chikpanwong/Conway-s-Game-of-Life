@@ -3,7 +3,7 @@ package pkgCWGeometryManager;
 import pkgCWGoLArray.CWGoLArray;
 import pkgCWUtils.CWPingPongArray;
 
-public class CWGeometryManager {
+public class CWGeometryManagerPublic {
     private int NUM_COLS;
     private int NUM_ROWS;
     private int PADDING;
@@ -14,13 +14,13 @@ public class CWGeometryManager {
 
     private CWPingPongArray myPPArray;
     private CWGoLArray myGolArray;
-    private CWGeometryManager GM;
+    private CWGeometryManagerPublic GM;
 
     private final int FPV = 2;
     private final int VPT = 4;
     private final int EPT = 6;
 
-    public CWGeometryManager(int maxRows, int maxCols, int offset, int size, int
+    public CWGeometryManagerPublic(int maxRows, int maxCols, int offset, int size, int
             padding, int[] winWidthHeight) {
         this.NUM_ROWS = maxRows;
         this.NUM_COLS = maxCols;

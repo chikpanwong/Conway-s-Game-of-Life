@@ -1,9 +1,7 @@
 package pkgCWDriver;
 
-import pkgCWGeometryManager.CWGeometryManager;
 import pkgCWGoLArray.CWGoLArray;
 import pkgCWRenderer.CWRenderer;
-import pkgCWUtils.CWPingPongArray;
 import pkgCWWindowsManager.CWWindowManager;
 
 import javax.swing.*;
@@ -27,8 +25,7 @@ public class CWDriver {
 //            System.out.println(numLiveCell);
             golArray = new CWGoLArray(numRows, numCols, numLiveCell);
 //            golArray.printArray();
-            System.out.println(golArray.totolLiveCell());
-
+//            System.out.println(golArray.totolLiveCell());
         }
 
         final int polyLength = 15, polyOffset = 5, polyPadding = 8;
