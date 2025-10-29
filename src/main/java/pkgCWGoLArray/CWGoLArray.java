@@ -17,7 +17,7 @@ public class CWGoLArray extends CWPingPongArray {
         initDead(numRows,numCols);
         int numLiveCells;
         numLiveCells = (int) (numRows * numCols * 0.2f + 0.5);
-        initRandomAlive(numRows,numRows,numLiveCells);
+        initRandomAlive(numRows,numCols,numLiveCells);
     }
 
     public CWGoLArray(int numRows, int numCols, int numLiveCells) {
@@ -26,7 +26,7 @@ public class CWGoLArray extends CWPingPongArray {
             throw new ArithmeticException("too many live cells, cannot contain all live cells");
         }
 //        initDead(numRows,numCols);
-        initRandomAlive(numRows,numRows,numLiveCells);
+        initRandomAlive(numRows,numCols,numLiveCells);
     }
 
     public void onTickUpdate() {

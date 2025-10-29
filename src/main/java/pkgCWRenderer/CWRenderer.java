@@ -114,25 +114,25 @@ public class CWRenderer {
 
             int[] indices = GM.generateTileIndices(aliveCount);
 
-            glBindBuffer(GL_ARRAY_BUFFER, vbo);
-            glBufferData(GL_ARRAY_BUFFER, (FloatBuffer) BufferUtils.
-                    createFloatBuffer(vertices.length).
-                    put(vertices).flip(), GL_STATIC_DRAW);
-
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, (IntBuffer) BufferUtils.
-                    createIntBuffer(indices.length).
-                    put(indices).flip(), GL_STATIC_DRAW);
-
 //            glBindBuffer(GL_ARRAY_BUFFER, vbo);
-//            FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(vertices.length);
-//            vertexBuffer.put(vertices).flip();
-//            glBufferData(GL_ARRAY_BUFFER, vertexBuffer, GL_DYNAMIC_DRAW);
+//            glBufferData(GL_ARRAY_BUFFER, (FloatBuffer) BufferUtils.
+//                    createFloatBuffer(vertices.length).
+//                    put(vertices).flip(), GL_STATIC_DRAW);
 //
 //            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-//            IntBuffer indexBuffer = BufferUtils.createIntBuffer(indices.length);
-//            indexBuffer.put(indices).flip();
-//            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBuffer, GL_DYNAMIC_DRAW);
+//            glBufferData(GL_ELEMENT_ARRAY_BUFFER, (IntBuffer) BufferUtils.
+//                    createIntBuffer(indices.length).
+//                    put(indices).flip(), GL_STATIC_DRAW);
+
+            glBindBuffer(GL_ARRAY_BUFFER, vbo);
+            FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(vertices.length);
+            vertexBuffer.put(vertices).flip();
+            glBufferData(GL_ARRAY_BUFFER, vertexBuffer, GL_DYNAMIC_DRAW);
+
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+            IntBuffer indexBuffer = BufferUtils.createIntBuffer(indices.length);
+            indexBuffer.put(indices).flip();
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBuffer, GL_DYNAMIC_DRAW);
 
             glEnableClientState(GL_VERTEX_ARRAY);
             glVertexPointer(2, GL_FLOAT, 0, 0L);
